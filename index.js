@@ -5,6 +5,7 @@ import express from "express";
 
 const app = express();
 app.use(express.json());
+let PORT = process.env.PORT || 3000;
 
 // try {
 //   mongoose
@@ -17,10 +18,11 @@ app.use(express.json());
 app.get("/", async (req, res) => {
   res.json({
     ok: true,
-    name: "akshith",
+    name: "harshith",
+    from: "hello from docker app",
   });
 });
 
-app.listen(2000, () => {
-  console.log("http://localhost:3000/");
+app.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}/`);
 });

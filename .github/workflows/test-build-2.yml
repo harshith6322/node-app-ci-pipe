@@ -1,0 +1,18 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the Docker image
+        run: docker build -t node-app-docker-image .
+      - name: Run the Docker container
+        run: docker run -d -p 3000:3000 node-app-docker-image
+      - name: Wait for the container to start
+        run: npx wait-on tcp:3000 --timeout 10000 --verbose
