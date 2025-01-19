@@ -25,7 +25,7 @@ jobs:
       - name: Run tests
         run: |
           npm start &
-          if npx wait-on tcp:3000 --timeout 10000; then
+          if npx wait-on tcp:3000 --timeout 30000; then
             echo "Port 3000 is available. Proceeding..."
           else
             echo "Port 3000 is not available. Exiting..."
