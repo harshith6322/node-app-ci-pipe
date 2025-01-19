@@ -21,6 +21,6 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(2000, () => {
   console.log("http://localhost:3000/");
 });
