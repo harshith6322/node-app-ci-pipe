@@ -23,7 +23,7 @@ jobs:
       - name: Build and push Docker images
         run: |
           docker --version
-          docker build -t node-app@v1 .
+          docker build -t node-app--v1 .
 
       - name: Checking docker container
         run: docker run -d -p 3000:3000 node-app@v1
