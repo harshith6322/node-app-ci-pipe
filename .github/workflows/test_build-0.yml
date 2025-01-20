@@ -22,4 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print date and IP address
-        run: echo "Today's date $(date)"
+        run: |
+          echo "Today's date: $(date)"
+          echo "IP address: $(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1)"
