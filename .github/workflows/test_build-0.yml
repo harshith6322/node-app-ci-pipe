@@ -1,4 +1,17 @@
-name: Testing corn jobs
+# name: Testing corn jobs
+
+# on:
+#   schedule:
+#     - cron: "*/1 * * * *"
+
+# jobs:
+#   show-time:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: print time
+#         run: echo "today date and ip address $(date) $(hostname -I)"
+
+name: Testing cron jobs
 
 on:
   schedule:
@@ -8,5 +21,7 @@ jobs:
   show-time:
     runs-on: ubuntu-latest
     steps:
-      - name: print time
-        run: echo "today date and ip address $(date) $(hostname -I)"
+      - name: Print date and IP address
+        run: |
+          echo "Today's date: $(date)"
+          echo "IP address: $(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1)"
