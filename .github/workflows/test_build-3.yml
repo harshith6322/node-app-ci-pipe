@@ -21,7 +21,8 @@ jobs:
         run: npm install
 
       - name: Running node-app
-        run: npm install pm2 -g & pm2 start index.js
+        run: |
+          npm install pm2 -g &&  pm2 start index.js
 
       - name: Run tests
         run: |
