@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: print time
-        run: echo "today date and ip address ${date} ${hostname -I}"
+        run: echo "today date and ip address $(date) $(hostname -I)"
