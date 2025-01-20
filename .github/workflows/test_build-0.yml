@@ -2,6 +2,7 @@ name: Testing corn jobs
 on:
   schedule:
     - cron: "*/1 * * * *"
+  push:
 
 jobs:
   show-time:
