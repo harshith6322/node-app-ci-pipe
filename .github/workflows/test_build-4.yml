@@ -26,7 +26,7 @@ jobs:
           docker build -t node-app--v1 .
 
       - name: Checking docker container
-        run: docker run -d -p 3000:3000 node-app@v1
+        run: docker run -d -p 3000:3000 node-app--v1
 
       - name: Testing port
         run: curl http://localhost:3000
