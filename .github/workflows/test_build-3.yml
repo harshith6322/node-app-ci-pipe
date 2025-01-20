@@ -1,0 +1,33 @@
+name: NODE.JD UNIT TESTS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check-out code
+        uses: actions/checkout@v4.2.2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version: 21
+
+      - name: Install lib
+        run: npm install
+
+      - name: Running node-app
+        run: npm install pm2 -g & pm2 start app.js
+
+      - name: Run tests
+        run: |
+          if npx wait-on tcp:3000 --timeout 15000 --interval 3000 --verbose; then
+           echo "Port 3000 is available. Proceeding..."
+          else
+           echo "Port 3000 is not available. Exiting..."
+           exit 1
+          fi
