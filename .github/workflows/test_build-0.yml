@@ -1,8 +1,7 @@
 name: Testing corn jobs
 on:
   schedule:
-    - cron: "*/1 * * * *"
-  push:
+    - cron: "*/1 * * * *" ## only runs every 5min even it should run every 1min
 
 jobs:
   show-time:

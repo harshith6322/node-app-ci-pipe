@@ -1,0 +1,10 @@
+name: Time&&Ip
+
+on: issues
+
+jobs:
+  time-of-vm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: time
+        run: echo "today date and ip address $(date) $(hostname -I)"
