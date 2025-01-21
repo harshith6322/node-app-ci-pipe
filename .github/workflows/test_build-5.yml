@@ -1,6 +1,11 @@
+#this run on every {issues}
 name: Time&&Ip
 
-on: issues
+# on: issues
+
+on:
+  issues:
+    types: opened
 
 jobs:
   time-of-vm:
@@ -8,3 +13,6 @@ jobs:
     steps:
       - name: time
         run: echo "today date and ip address $(date) $(hostname -I)"
+#types: [opened, edited, milestoned]
+#types: [created, deleted]
+##types: [opened, deleted] this only run on certian condtions
