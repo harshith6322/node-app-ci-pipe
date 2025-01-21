@@ -32,7 +32,7 @@ jobs:
 
       - name: Checking Docker Pull && Running Docker
         run: |
-          docker rmi harshithreddy6322/node-app-from-git:latest
+          docker rmi -f harshithreddy6322/node-app-from-git:latest
           sleep 5s
           docker pull harshithreddy6322/node-app-from-git
           sleep 10s
