@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v6.12.0
         with:
           context: .
-          push: ture
+          push: true
           tags: harshithreddy6322/node-app-from-git:latest
 
       - name: Checking Docker image
