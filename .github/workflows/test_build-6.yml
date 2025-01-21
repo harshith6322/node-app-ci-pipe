@@ -20,4 +20,4 @@ jobs:
         uses: actions/checkout@v4.2.2
 
       - name: checking-code
-        run: pwd && ls && dir
+        run: cat Dockerfile
