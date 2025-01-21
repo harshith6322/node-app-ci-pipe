@@ -30,11 +30,15 @@ jobs:
           push: true
           tags: harshithreddy6322/node-app-from-git:latest
 
-      - name: Checking Docker image
-        run: docker run -d -p 3000:3000 harshithreddy6322/node-app-from-git
-
-      - name: Checking logs of Images && Checking ports
+      - name: Checking Docker Pull && Running Docker
         run: |
+          docker rmi harshithreddy6322/node-app-from-git:latest
+          sleep 5s
+          docker pull harshithreddy6322/node-app-from-git
           sleep 10s
+          docker run -d -p 3000:3000 harshithreddy6322/node-app-from-git:latest
+
+      - name: Testing API Res
+        run: |
+          sleep 5s
           curl http://localhost:3000
-          docker logs harshithreddy6322/node-app-from-git
