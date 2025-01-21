@@ -1,0 +1,23 @@
+## Multi-Trigger yaml on multi brnach
+
+name: Multi-Trigger
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  Multi-Trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout-code
+        uses: actions/checkout@v4.2.2
+
+      - name: checking-code
+        run:
