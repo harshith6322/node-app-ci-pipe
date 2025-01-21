@@ -1,0 +1,39 @@
+name: Build Image && push Docker Hub
+
+on:
+  push:
+    branches:
+      - main
+      - pro
+  pull_request:
+    branches:
+      - main
+      - pro
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check-out Code
+        uses: actions/checkout@v4.2.2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Docker Installing
+        uses: docker/build-push-action@v6.12.0
+        with:
+          context: .
+          push: ture
+          tags: harshithreddy6322/node-app-from-git:latest
+
+      - name: Checking Docker image
+        run: docker run -d -p 3000:3000 harshithreddy6322/node-app-from-git
+
+      - name: Checking logs of Images && Checking ports
+        run: |
+          curl http://localhost:3000
+          docker logs harshithreddy6322/node-app-from-git
