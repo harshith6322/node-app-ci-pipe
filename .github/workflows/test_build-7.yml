@@ -35,5 +35,6 @@ jobs:
 
       - name: Checking logs of Images && Checking ports
         run: |
+          sleep 10s
           curl http://localhost:3000
           docker logs harshithreddy6322/node-app-from-git
