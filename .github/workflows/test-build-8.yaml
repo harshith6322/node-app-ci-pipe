@@ -57,10 +57,9 @@ jobs:
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.AWS_HOST }}
+          host: ${{ secrets.AWS_HOST}}
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_KEY}}
-          port: ${{ secrets.AWS_PORT }}
           script: |
             sudo sudo snap install docker
             sleep 5s
