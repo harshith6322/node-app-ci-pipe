@@ -33,7 +33,7 @@ jobs:
 
       - name: Docker Pull Image
         run: |
-          docker ps && docker docker ps -aq && docker rmi -f harshithreddy6322/node-app-from-git:latest 
+          docker rmi -f harshithreddy6322/node-app-from-git:latest || true
           sleep 5s
           docker pull harshithreddy6322/node-app-from-git:latest
           docker -d -p 3000:3000 harshithreddy6322/node-app-from-git:latest
