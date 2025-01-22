@@ -1,0 +1,74 @@
+name: Node.js CI-CD
+
+on:
+  push:
+    branches:
+      - main
+      - pro
+
+  pull_request:
+    branches:
+      - main
+      - pro
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check-out code
+        uses: actions/checkout@v4.2.2
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Docker Image
+        uses: docker/build-push-action@v6.12.0
+        with:
+          context: .
+          push: true
+          tags: harshithreddy6322/node-app-from-git:latest
+
+      - name: Docker Pull Image
+        run: |
+          docker ps && docker docker ps -aq && docker rmi -f harshithreddy6322/node-app-from-git:latest 
+          sleep 5s
+          docker pull harshithreddy6322/node-app-from-git:latest
+          docker -d -p 3000:3000 harshithreddy6322/node-app-from-git:latest
+          sleep 5s
+
+      - name: Testing 3000 Port
+        run: |
+          for i in {1..6}; do
+            response=$(curl --write-out '%{http_code}' --silent --output /dev/null http://localhost:3000)
+            if [ "$response" -eq 200 ]; then
+              echo "Application is running successfully on port 3000"
+              exit 0
+            else
+              echo "Attempt $i: Failed to reach application on port 3000, retrying in 3 seconds..."
+              sleep 3
+            fi
+          done
+          echo "Failed to reach application on port 3000 after 6 attempts"
+          exit 1
+
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          key: ${{ secrets.AWS_KEY }}
+          username: ${{ secrets.AWS_USERNAME }}
+          port: ${{ secrets.AWS_PORT }}
+          script: |
+            sudo sudo snap install docker
+            sleep 5s
+            if ! sudo docker -v; then
+              echo "Docker is not installed. Exiting..."
+              exit 1
+            fi
+            sudo docker pull harshithreddy6322/node-app-from-git:latest
+            sudo docker stop node-app || true
+            sudo docker rm node-app || true
+            sudo docker run -d --name node-app -p 3000:3000 harshithreddy6322/node-app-from-git:latest
