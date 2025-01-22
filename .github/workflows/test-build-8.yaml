@@ -58,8 +58,8 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.AWS_HOST }}
-          key: ${{ secrets.AWS_KEY}}
           username: ${{ secrets.AWS_USERNAME }}
+          key: ${{ secrets.AWS_KEY}}
           port: ${{ secrets.AWS_PORT }}
           script: |
             sudo sudo snap install docker
