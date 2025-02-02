@@ -1,0 +1,19 @@
+
+name: Time&&Ip
+
+
+
+on:
+  push:
+    branches: ["main"]
+    
+
+jobs:
+  time-of-vm:
+    runs-on: self-hosted
+    steps:
+      - name: time
+        run: echo "today date and ip address $(date) $(hostname -I)"
+#types: [opened, edited, milestoned]
+#types: [created, deleted]
+##types: [opened, deleted] this only run on certian condtions
