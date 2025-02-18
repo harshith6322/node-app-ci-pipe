@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Install Dependencies & Test') {
             steps {
-                sh 'npm install'
+                sh 'npm install --unsafe-perm'
                 sh 'npm test | true'
             }
         }
