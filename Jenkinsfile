@@ -28,15 +28,14 @@ pipeline {
                 sh 'npm test | true'
             }
         }
-        stage('OWASP Dependency Check') {
+       stage('OWASP Dependency Check') {
             steps {
-                // Run a security scan using OWASP dependency-check (ensure it’s available or install it on the fly)
-                sh '''
-                    npm install -g owasp-dependency-check
-                    npm run owasp-check
-                '''
-            }
-        }
+              sh '''
+              npm install -g dependency-check
+              dependency-check --project "NodeApp" --scan . --format HTML --out owasp-report.html
+              '''
+             }
+         }
         stage('Build Docker Image') {
             steps {
                 // Build a Docker image using the Dockerfile in your repository
