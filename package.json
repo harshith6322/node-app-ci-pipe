@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo 'No test specified' && exit 0"
+    "test": "echo 'No test specified' && exit 0",
+    "owasp-check": "dependency-check --project NodeApp --scan . --format HTML --out owasp-report.html"
   },
   "keywords": [],
   "author": "",
