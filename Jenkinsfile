@@ -1,11 +1,6 @@
 pipeline {
     // Define the build agent – here we run our pipeline steps inside a Docker container running Node.js
-    agent {
-        docker {
-            image 'node:20'  // Use your preferred Node version
-            args '--user root'
-        }
-    }
+   agent any
     // Set environment variables used across stages
     environment {
         DOCKER_HUB_CREDENTIALS = 'docker-hub-credentials'  // This should match your Jenkins credentials ID
