@@ -33,7 +33,7 @@ pipeline {
                 // Run a security scan using OWASP dependency-check (ensure it’s available or install it on the fly)
                 sh '''
                     npm install -g owasp-dependency-check
-                    dependency-check --project "NodeApp" --scan . --format HTML --out owasp-report.html
+                    npm run owasp-check
                 '''
             }
         }
